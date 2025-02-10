@@ -3,7 +3,6 @@ from typing import OrderedDict
 
 from pydantic import BaseModel
 
-
 class Genre(str, Enum):
     """Book genres."""
 
