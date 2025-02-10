@@ -21,11 +21,15 @@ jobs:
 
       - name: Install Dependencies
         run: |
+          python -m venv venv
+          source venv/bin/activate
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
       - name: Run Pytest
-        run: pytest tests/
+        run:|
+          source venv/bin/activate
+          pytest --maxfail=5 --disable-warnings
 
       - name: Fail on Invalid Code
         run: exit 1
