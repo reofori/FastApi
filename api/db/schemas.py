@@ -2,7 +2,7 @@ from enum import Enum
 from typing import OrderedDict
 
 from pydantic import BaseModel
-
+o
 
 class Genre(str, Enum):
     """Book genres."""
