@@ -24,8 +24,8 @@ jobs:
 
     - name: Build and push Docker image
       run: |
-        docker build -t your-dockerhub-username/fastapi-app:latest .
-        docker push your-dockerhub-username/fastapi-app:latest
+        docker build -t ${{ secrets.DOCKER_USERNAME }}/fastapi-app:latest .
+        docker push ${{ secrets.DOCKER_USERNAME }}/fastapi-app:latest
 
     - name: Deploy to Server
       uses: appleboy/ssh-action@v0.1.10
@@ -34,7 +34,7 @@ jobs:
         username: ${{ secrets.SERVER_USER }}
         key: ${{ secrets.SSH_PRIVATE_KEY }}
         script: |
-          docker pull your-dockerhub-username/fastapi-app:latest
+          docker pull ${{ secrets.DOCKER_USERNAME }}/fastapi-app:latest
           docker stop fastapi-app || true
           docker rm fastapi-app || true
-          docker run -d --name fastapi-app -p 8000:8000 your-dockerhub-username/fastapi-app:latest
+          docker run -d --name fastapi-app -p 8000:8000 ${{ secrets.DOCKER_USERNAME }}/fastapi-app:latest
